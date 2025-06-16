@@ -1,0 +1,20 @@
+/lumio-webseite
+│
+├── index.html
+├── eltern.html
+├── kinder.html
+├── frag-lumo.html
+├── blog.html
+├── impressum.html
+├── style.css
+│
+├── /images
+│   ├── noni-kid.png
+│   ├── niko.png
+│   └── lumo.png
+│
+├── /assets
+│   └── (PDFs, weitere Bilder, Downloads)
+│
+└── /js
+    └── (später: JavaScript für KI/Interaktivität)
