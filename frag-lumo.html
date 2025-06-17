@@ -1,9 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frag Lumo – lumio.io</title>
+  <title>Frag Lumo – Lumio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,36 +13,23 @@
       <a href="index.html">Startseite</a>
       <a href="eltern.html">Für Eltern</a>
       <a href="kinder.html">Für Kinder</a>
-      <a href="frag-lumo.html">Frag Lumo</a>
       <a href="blog.html">Blog/News</a>
       <a href="impressum.html">Impressum</a>
     </nav>
   </header>
-  <section class="section">
-  <h2>Frag Lumo!</h2>
-  <form id="lumo-form">
-    <input type="text" id="lumo-question" placeholder="Deine Frage an Lumo" style="width: 70%; padding: 0.5em; border-radius: 8px;">
-    <button type="submit" style="padding: 0.5em 1em; border-radius: 8px; background: #43e6c2; color: #fff; border: none; font-weight: bold;">Fragen</button>
-  </form>
-  <div id="lumo-answer" class="bubble" style="margin-top:1em;"></div>
-</section>
-  <footer>
-    © 2025 lumio.io – Gemeinsam für einen smarteren Familienalltag
-  </footer>
-  <script>
-document.getElementById('lumo-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const question = document.getElementById('lumo-question').value.trim();
-  let answer = '';
-  if (!question) {
-    answer = 'Bitte stelle eine Frage!';
-  } else if (question.toLowerCase().includes('himmel')) {
-    answer = 'Der Himmel erscheint blau, weil das Sonnenlicht in der Atmosphäre gestreut wird und blaues Licht stärker gestreut wird als andere Farben.';
-  } else {
-    answer = 'Das ist eine tolle Frage! Bald gibt es hier echte KI-Antworten.';
-  }
-  document.getElementById('lumo-answer').innerHTML = answer;
-});
-</script>
+  <main>
+    <section>
+      <h2>Stelle Lumo eine Frage!</h2>
+      <form>
+        <input type="text" placeholder="Deine Frage an Lumo" style="width: 70%;">
+        <button type="submit">Fragen</button>
+      </form>
+      <p><em>Beispiel: „Warum ist der Himmel blau?“</em></p>
+      <div>
+        <strong>Lumos Antwort:</strong>
+        <p>Der Himmel erscheint blau, weil das Sonnenlicht in der Atmosphäre gestreut wird und blaues Licht stärker gestreut wird als andere Farben.</p>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
