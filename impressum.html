@@ -8,16 +8,24 @@
 </head>
 <body>
   <header>
+    <img src="images/noni-kid.png" alt="Noni – Dein Begleiter" class="logo">
     <h1>Impressum</h1>
-    <nav>
-      <a href="index.html">Startseite</a>
-      <a href="eltern.html">Für Eltern</a>
-      <a href="kinder.html">Für Kinder</a>
-      <a href="frag-lumo.html">Frag Lumo</a>
-      <a href="blog.html">Blog/News</a>
-      <a href="impressum.html">Impressum</a>
+    <nav class="navbar">
+      <span class="burger" id="burger">&#9776;</span>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Startseite</a>
+        <a href="eltern.html">Für Eltern</a>
+        <a href="kinder.html">Für Kinder</a>
+        <a href="frag-lumo.html">Frag Lumo</a>
+        <a href="blog.html">Blog/News</a>
+        <a href="impressum.html">Impressum</a>
+      </div>
     </nav>
   </header>
+  <div class="avatar-begleiter">
+    <img src="images/noni-kid.png" alt="Noni – Dein Begleiter" class="avatar-img">
+    <span class="avatar-name">Noni hilft dir weiter!</span>
+  </div>
   <section class="section">
     <h2>Angaben gemäß § 5 TMG</h2>
     <p>Hier trägst du später deine Kontaktdaten und rechtlichen Hinweise ein.</p>
@@ -25,5 +33,10 @@
   <footer>
     © 2025 lumio.io – Gemeinsam für einen smarteren Familienalltag
   </footer>
+  <script>
+    document.getElementById('burger').addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+  </script>
 </body>
 </html>

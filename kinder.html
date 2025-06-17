@@ -9,26 +9,67 @@
 <body>
   <header>
     <h1>Für Kinder</h1>
-    <nav>
-      <a href="index.html">Startseite</a>
-      <a href="eltern.html">Für Eltern</a>
-      <a href="kinder.html">Für Kinder</a>
-      <a href="frag-lumo.html">Frag Lumo</a>
-      <a href="blog.html">Blog/News</a>
-      <a href="impressum.html">Impressum</a>
-    </nav>
   </header>
+
   <section class="section">
-    <h2>Lernspiel: Zahlenrätsel</h2>
-    <p>Welches ist die nächste Zahl in der Reihe? 2, 4, 6, 8, ...</p>
-    <p><strong>Lösung:</strong> 10</p>
+    <h2>Wähle deinen Begleiter</h2>
+    <div class="avatars">
+      <div class="avatar selected" data-name="Niko">
+        <img src="images/niko.png" alt="Niko Avatar">
+        <span>Niko</span>
+      </div>
+      <div class="avatar" data-name="Lumo">
+        <img src="images/lumo.png" alt="Lumo Avatar">
+        <span>Lumo</span>
+      </div>
+    </div>
+    <div id="avatar-message" class="bubble" style="text-align:center;">
+      Hallo, ich bin <strong>Niko</strong>! Lass uns gemeinsam lernen oder eine Geschichte erleben.
+    </div>
   </section>
-  <section class="section">
-    <h2>Geschichte des Tages</h2>
-    <p>Es war einmal ein kleiner Roboter namens Lumo, der Kindern beim Lernen half...</p>
+
+  <section class="section" id="niko-spiel">
+    <h2>Lernspiel mit Niko</h2>
+    <div id="spielbereich">
+      <p id="frage"></p>
+      <input type="text" id="antwort" placeholder="Deine Antwort">
+      <button id="absenden">Antworten</button>
+      <div id="feedback" class="bubble"></div>
+    </div>
   </section>
+
+  <section class="section" id="lumo-story" style="display:none;">
+    <h2>Geschichten mit Lumo</h2>
+    <form id="story-form">
+      <input type="text" id="story-wunsch" placeholder="Worüber soll Lumo eine Geschichte erzählen?">
+      <button type="submit">Geschichte zaubern</button>
+    </form>
+    <div id="story-ausgabe" class="bubble"></div>
+  </section>
+
   <footer>
     © 2025 lumio.io – Gemeinsam für einen smarteren Familienalltag
   </footer>
+  <script src="js/kinder-ki.js"></script>
+  <script>
+async function frageAnKI(prompt) {
+  const response = await fetch('http://localhost:3001/api/ask', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt })
+  });
+  const data = await response.json();
+  return data.answer;
+}
+
+// Beispiel für ein Fragefeld:
+document.getElementById('lumo-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const frage = document.getElementById('lumo-question').value;
+  document.getElementById('lumo-answer').innerText = "Lade Antwort...";
+  const antwort = await frageAnKI(frage);
+  document.getElementById('lumo-answer').innerText = antwort;
+});
+</script>
 </body>
 </html>

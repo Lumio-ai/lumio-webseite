@@ -8,29 +8,28 @@
 </head>
 <body>
   <header>
+    <img src="images/logo-noni.png" alt="lumio.io Logo" class="logo">
     <h1>lumio.io</h1>
     <p>Die smarte Familienplattform für Eltern & Kinder</p>
-    <nav>
-      <a href="eltern.html">Für Eltern</a>
-      <a href="kinder.html">Für Kinder</a>
-      <a href="frag-lumo.html">Frag Lumo</a>
-      <a href="blog.html">Blog/News</a>
-      <a href="impressum.html">Impressum</a>
+    <nav class="navbar">
+      <span class="burger" id="burger">&#9776;</span>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Startseite</a>
+        <a href="eltern.html">Für Eltern</a>
+        <a href="kinder.html">Für Kinder</a>
+        <a href="frag-lumo.html">Frag Lumo</a>
+        <a href="blog.html">Blog/News</a>
+        <a href="impressum.html">Impressum</a>
+      </div>
     </nav>
   </header>
-  <header>
-  <img src="images/logo-noni.png" alt="lumio.io Logo" style="height: 70px; vertical-align: middle; margin-bottom: 0.5em;">
-  <h1 style="display: inline-block; margin-left: 1em; vertical-align: middle;">lumio.io</h1>
-  <p>Die smarte Familienplattform für Eltern & Kinder</p>
-  <nav>
-    <!-- Navigation wie gehabt -->
-  </nav>
-</header>
-
+  <div class="avatar-begleiter">
+    <img src="images/noni-kid.png" alt="Noni – Dein Begleiter" class="avatar-img">
+    <span class="avatar-name">Noni begleitet dich!</span>
+  </div>
   <div class="intro">
     <p>lumio.io ist deine smarte Familienplattform, die Eltern und Kinder im Alltag unterstützt – mit cleveren KI-Lösungen, kreativen Ideen und viel Herz.</p>
   </div>
-
   <section class="section">
     <h2>Für Eltern</h2>
     <ul>
@@ -40,7 +39,6 @@
       <li>Kostenlose Downloads: Checklisten, Planer, Vorlagen</li>
     </ul>
   </section>
-
   <section class="section">
     <h2>Für Kinder</h2>
     <ul>
@@ -50,44 +48,13 @@
       <li>Personalisierte digitale Bücher zum Vorlesen</li>
     </ul>
   </section>
-
-  <section class="section">
-    <h2>Wähle deinen Begleiter</h2>
-
-    <div class="character">
-      <img src="images/noni-kid.png" alt="Noni Kind">
-      <div>
-        <h3>Noni – Die Alltagsheldin für Eltern</h3>
-        <p>Noni ist die zuverlässige Helferin im Familienalltag. Sie kennt die besten Tipps und unterstützt mit cleveren KI-Lösungen.</p>
-        <div class="bubble">„Keine Sorge, ich habe für alles eine smarte Lösung!“</div>
-      </div>
-    </div>
-
-    <div class="character">
-      <img src="images/niko.png" alt="Niko">
-      <div>
-        <h3>Niko – Der neugierige Lernfreund</h3>
-        <p>Niko begleitet Kinder auf spannenden Lernabenteuern und macht Wissen lebendig.</p>
-        <div class="bubble">„Lass uns gemeinsam die Welt entdecken!“</div>
-      </div>
-    </div>
-
-    <div class="character">
-      <img src="images/lumo.png" alt="Lumo">
-      <div>
-        <h3>Lumo – Der Geschichtenzauberer</h3>
-        <p>Lumo erschafft magische Geschichten ganz nach den Wünschen deines Kindes.</p>
-        <div class="bubble">„Ich erzähle dir eine magische Geschichte – ganz nach deinem Wunsch!“</div>
-      </div>
-    </div>
-  </section>
-
   <footer>
     © 2025 lumio.io – Gemeinsam für einen smarteren Familienalltag
   </footer>
+  <script>
+    document.getElementById('burger').addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
-<div class="avatar">
-  <img src="images/noni-kid.png" alt="Noni Avatar">
-  <span>Noni</span>
-</div>

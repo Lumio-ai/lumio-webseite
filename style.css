@@ -1,56 +1,45 @@
-body {
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(135deg, #f0f4ff 0%, #e9f8fb 100%);
-  color: #22223b;
-  min-height: 100vh;
+.avatars {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  margin: 2em 0;
 }
-header {
-  background: linear-gradient(90deg, #7f9cf5 0%, #43e6c2 100%);
-  color: #fff;
-  padding: 2.5rem 1rem 1.5rem 1rem;
-  text-align: center;
-  border-bottom-left-radius: 32px;
-  border-bottom-right-radius: 32px;
-  box-shadow: 0 4px 24px rgba(67,230,194,0.08);
+.avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border-radius: 1em;
+  padding: 1em;
+  background: #f0f4ff;
+  box-shadow: 0 2px 8px rgba(127,156,245,0.07);
+  border: 2px solid transparent;
 }
-header h1 {
-  margin: 0;
-  font-size: 2.6rem;
-  letter-spacing: 2px;
+.avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transition: transform 0.2s;
 }
-header p {
-  margin: 0.5rem 0 0 0;
-  font-size: 1.3rem;
-  opacity: 0.92;
+.avatar img:hover {
+  animation: wiggle 0.6s infinite;
 }
-nav {
-  margin-top: 1.5rem;
+@keyframes wiggle {
+  0% { transform: rotate(-5deg);}
+  25% { transform: rotate(5deg);}
+  50% { transform: rotate(-5deg);}
+  75% { transform: rotate(5deg);}
+  100% { transform: rotate(0deg);}
 }
-nav a {
-  color: #fff;
-  background: #43e6c2;
-  text-decoration: none;
-  margin: 0 0.7rem;
-  padding: 0.5em 1.2em;
-  border-radius: 2em;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: background 0.2s;
-  box-shadow: 0 2px 8px rgba(67,230,194,0.07);
+.avatar.selected {
+  border-color: #ff9900;
+  background: #fff7e6;
 }
-nav a:hover {
-  background: #7f9cf5;
-}
-.intro {
-  padding: 2rem 1rem 1.5rem 1rem;
-  text-align: center;
-  background: #f6fafe;
-  margin: 2rem auto 1.5rem auto;
-  border-radius: 24px;
-  max-width: 700px;
-  box-shadow: 0 2px 12px rgba(127,156,245,0.05);
+.avatar span {
+  margin-top: 0.7em;
+  font-weight: bold;
+  color: #7f9cf5;
 }
 .section {
   padding: 2rem 1rem;
@@ -59,25 +48,6 @@ nav a:hover {
   border-radius: 20px;
   max-width: 700px;
   box-shadow: 0 2px 12px rgba(67,230,194,0.06);
-}
-.section h2 {
-  color: #7f9cf5;
-  margin-bottom: 1rem;
-}
-ul {
-  padding-left: 1.5rem;
-}
-.character {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-.character img {
-  width: 110px;
-  border-radius: 1rem;
-  background: #e9f8fb;
-  box-shadow: 0 4px 16px rgba(127,156,245,0.08);
 }
 .bubble {
   background: #f6fafe;
@@ -88,59 +58,41 @@ ul {
   color: #22223b;
   border-left: 5px solid #43e6c2;
 }
-footer {
-  background: linear-gradient(90deg, #7f9cf5 0%, #43e6c2 100%);
+input, button {
+  font-size: 1.1em;
+  margin: 0.5em 0;
+}
+.meal-type-btns {
+  display: flex;
+  gap: 1em;
+  margin-bottom: 1em;
+  justify-content: center;
+}
+.meal-type-btns button {
+  padding: 0.5em 1.2em;
+  border-radius: 2em;
+  border: none;
+  background: #43e6c2;
   color: #fff;
-  padding: 1.2rem;
-  text-align: center;
-  font-size: 1rem;
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
-  margin-top: 2rem;
-  box-shadow: 0 -2px 12px rgba(127,156,245,0.07);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
 }
-@media (max-width: 700px) {
-  .character {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  .character img {
-    width: 80px;
-  }
-  .section {
-    padding: 1rem;
-  }
+.meal-type-btns button.active,
+.meal-type-btns button:hover {
+  background: #7f9cf5;
 }
-.avatar img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  transition: transform 0.2s;
+#meal-plan {
+  background: #f6fafe;
+  border-radius: 1em;
+  padding: 1.5em;
+  margin-bottom: 1em;
+  box-shadow: 0 2px 8px rgba(127,156,245,0.07);
 }
-.avatar img:hover {
-  animation: wiggle 0.6s infinite;
+.orga-tools li {
+  margin-bottom: 0.7em;
 }
-@keyframes wiggle {
-  0% { transform: rotate(-5deg);}
-  25% { transform: rotate(5deg);}
-  50% { transform: rotate(-5deg);}
-  75% { transform: rotate(5deg);}
-  100% { transform: rotate(0deg);}
-}
-.avatar img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  transition: transform 0.2s;
-}
-.avatar img:hover {
-  animation: wiggle 0.6s infinite;
-}
-@keyframes wiggle {
-  0% { transform: rotate(-5deg);}
-  25% { transform: rotate(5deg);}
-  50% { transform: rotate(-5deg);}
-  75% { transform: rotate(5deg);}
-  100% { transform: rotate(0deg);}
+.tipp-liste li {
+  margin-bottom: 0.7em;
+  list-style: "💡 ";
 }
