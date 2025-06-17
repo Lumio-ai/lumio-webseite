@@ -44,5 +44,43 @@ document.getElementById('lumo-form').addEventListener('submit', function(e) {
   document.getElementById('lumo-answer').innerHTML = answer;
 });
 </script>
+<form id="lumo-form">
+  <input type="text" id="lumo-question" placeholder="Deine Frage an Lumo" style="width: 70%; padding: 0.5em; border-radius: 8px;">
+  <button type="submit" style="padding: 0.5em 1em; border-radius: 8px; background: #43e6c2; color: #fff; border: none; font-weight: bold;">Fragen</button>
+</form>
+<div id="lumo-answer" class="bubble" style="margin-top:1em;"></div>
+<form id="lumo-form">
+  <input type="text" id="lumo-question" placeholder="Deine Frage an Lumo" style="width: 70%; padding: 0.5em; border-radius: 8px;">
+  <button type="submit" style="padding: 0.5em 1em; border-radius: 8px; background: #43e6c2; color: #fff; border: none; font-weight: bold;">Fragen</button>
+</form>
+<div id="lumo-answer" class="bubble" style="margin-top:1em;"></div>
+
+<script>
+document.getElementById('lumo-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const question = document.getElementById('lumo-question').value.trim();
+  if (!question) {
+    document.getElementById('lumo-answer').innerHTML = 'Bitte stelle eine Frage!';
+    return;
+  }
+  document.getElementById('lumo-answer').innerHTML = 'Lade Antwort...';
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer DEIN_OPENAI_API_KEY'
+    },
+    body: JSON.stringify({
+      model: 'gpt-3.5-turbo',
+      messages: [{role: 'user', content: question}],
+      max_tokens: 300
+    })
+  });
+  const data = await response.json();
+  document.getElementById('lumo-answer').innerHTML =
+    data.choices && data.choices[0] ? data.choices[0].message.content : 'Es gab ein Problem mit der Antwort.';
+});
+</script>
+
 </body>
 </html>
