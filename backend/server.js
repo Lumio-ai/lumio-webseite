@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/api/ask', async (req, res) => {
-  const { prompt } = req.body;
+  const { prompt } = req.body; // Das Backend erwartet ein Feld "prompt
   const apiKey = process.env.OPENAI_API_KEY;
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {

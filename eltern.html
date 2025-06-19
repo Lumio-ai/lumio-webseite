@@ -24,58 +24,6 @@
   </header>
   <div class="avatar-begleiter">
     <img src="images/noni-kid.png" alt="Noni – Dein Begleiter" class="avatar-img">
-    <span class="avatar-name">Noni begleitet dich!</span>
-  </div>
-  <section class="section">
-    <h2>To-do-Liste für den Schulstart</h2>
-    <ul>
-      <li>Schulsachen besorgen</li>
-      <li>Stundenplan ausdrucken</li>
-      <li>Elternabend notieren</li>
-      <li>Notfallkontakte aktualisieren</li>
-    </ul>
-    <a href="assets/todo-liste.pdf" download>To-do-Liste als PDF herunterladen</a>
-  </section>
-  <section class="section">
-    <h2>Organisationstipps</h2>
-    <p>Hier findest du bald praktische Tipps für den Familienalltag!</p>
-  </section>
-  <footer>
-    © 2025 lumio.io – Gemeinsam für einen smarteren Familienalltag
-  </footer>
-  <script>
-    document.getElementById('burger').addEventListener('click', function() {
-      document.getElementById('navLinks').classList.toggle('active');
-    });
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Für Eltern – lumio.io</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <img src="images/noni-kid.png" alt="Noni – Dein Begleiter" class="logo">
-    <h1>Für Eltern</h1>
-    <nav class="navbar">
-      <span class="burger" id="burger">&#9776;</span>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Startseite</a>
-        <a href="eltern.html">Für Eltern</a>
-        <a href="kinder.html">Für Kinder</a>
-        <a href="frag-lumo.html">Frag Lumo</a>
-        <a href="blog.html">Blog/News</a>
-        <a href="impressum.html">Impressum</a>
-      </div>
-    </nav>
-  </header>
-  <div class="avatar-begleiter">
-    <img src="images/noni-kid.png" alt="Noni – Dein Begleiter" class="avatar-img">
     <span class="avatar-name">Noni unterstützt dich!</span>
   </div>
 
@@ -122,7 +70,7 @@
       document.getElementById('navLinks').classList.toggle('active');
     });
 
-    // KI-Essensplan (Demo, vorbereitet für OpenAI)
+    // KI-Essensplan (Demo, für echtes KI-Backend siehe Kommentar)
     const mealPlans = {
       "Standard": {
         breakfast: "Haferflocken mit Milch, Apfelstücken und Nüssen",
@@ -155,10 +103,7 @@
         renderMealPlan(this.dataset.type);
       }
     });
-    // Initial anzeigen
     renderMealPlan("Standard");
-
-    // PDF-Export (Demo: nur Text-Download)
     function downloadMealPlanPDF() {
       const text = document.getElementById('meal-plan').innerText;
       const blob = new Blob([text], {type: "text/plain"});
@@ -168,36 +113,7 @@
       link.click();
     }
     window.downloadMealPlanPDF = downloadMealPlanPDF;
-
-    // Für echte KI: Siehe Kommentar unten
-    /*
-    async function fetchMealPlanFromAI(type) {
-      const prompt = `Erstelle einen Tages-Essensplan (${type}) für Frühstück, Mittagessen und Abendessen – geeignet für Kinder und Erwachsene. Gib Rezepte und Zutaten an.`;
-      // Hier Anfrage an eigenes Backend, das OpenAI-API nutzt
-      // Dann mealPlan = await fetch(...);
-      // renderMealPlan(mealPlan);
-    }
-    */
+    // Für echtes KI-Backend: siehe vorherige Antworten!
   </script>
-  <script>
-async function frageAnKI(prompt) {
-  const response = await fetch('http://localhost:3001/api/ask', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt })
-  });
-  const data = await response.json();
-  return data.answer;
-}
-
-// Beispiel für ein Fragefeld:
-document.getElementById('lumo-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const frage = document.getElementById('lumo-question').value;
-  document.getElementById('lumo-answer').innerText = "Lade Antwort...";
-  const antwort = await frageAnKI(frage);
-  document.getElementById('lumo-answer').innerText = antwort;
-});
-</script>
 </body>
 </html>

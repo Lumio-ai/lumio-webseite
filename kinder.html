@@ -9,8 +9,18 @@
 <body>
   <header>
     <h1>Für Kinder</h1>
+    <nav class="navbar">
+      <span class="burger" id="burger">&#9776;</span>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Startseite</a>
+        <a href="eltern.html">Für Eltern</a>
+        <a href="kinder.html">Für Kinder</a>
+        <a href="frag-lumo.html">Frag Lumo</a>
+        <a href="blog.html">Blog/News</a>
+        <a href="impressum.html">Impressum</a>
+      </div>
+    </nav>
   </header>
-
   <section class="section">
     <h2>Wähle deinen Begleiter</h2>
     <div class="avatars">
@@ -27,7 +37,6 @@
       Hallo, ich bin <strong>Niko</strong>! Lass uns gemeinsam lernen oder eine Geschichte erleben.
     </div>
   </section>
-
   <section class="section" id="niko-spiel">
     <h2>Lernspiel mit Niko</h2>
     <div id="spielbereich">
@@ -37,7 +46,6 @@
       <div id="feedback" class="bubble"></div>
     </div>
   </section>
-
   <section class="section" id="lumo-story" style="display:none;">
     <h2>Geschichten mit Lumo</h2>
     <form id="story-form">
@@ -46,30 +54,64 @@
     </form>
     <div id="story-ausgabe" class="bubble"></div>
   </section>
-
   <footer>
     © 2025 lumio.io – Gemeinsam für einen smarteren Familienalltag
   </footer>
-  <script src="js/kinder-ki.js"></script>
   <script>
-async function frageAnKI(prompt) {
-  const response = await fetch('http://localhost:3001/api/ask', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt })
-  });
-  const data = await response.json();
-  return data.answer;
-}
-
-// Beispiel für ein Fragefeld:
-document.getElementById('lumo-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const frage = document.getElementById('lumo-question').value;
-  document.getElementById('lumo-answer').innerText = "Lade Antwort...";
-  const antwort = await frageAnKI(frage);
-  document.getElementById('lumo-answer').innerText = antwort;
-});
-</script>
+    // Burger-Menü
+    document.getElementById('burger').addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('active');
+    });
+    // Avatar-Auswahl und Bereich-Umschaltung
+    document.querySelectorAll('.avatar').forEach(avatar => {
+      avatar.addEventListener('click', function() {
+        document.querySelectorAll('.avatar').forEach(a => a.classList.remove('selected'));
+        this.classList.add('selected');
+        const name = this.dataset.name;
+        document.getElementById('avatar-message').innerHTML =
+          `Hallo, ich bin <strong>${name}</strong>! Lass uns gemeinsam ${name === 'Niko' ? 'lernen' : 'eine Geschichte erleben'}.`;
+        document.getElementById('niko-spiel').style.display = name === 'Niko' ? 'block' : 'none';
+        document.getElementById('lumo-story').style.display = name === 'Lumo' ? 'block' : 'none';
+      });
+    });
+    // Lernspiel mit Niko
+    const fragen = [
+      { frage: "Was kommt nach 2, 4, 6, 8?", loesung: "10" },
+      { frage: "Was ist 3 + 5?", loesung: "8" },
+      { frage: "Wie viel ist 7 - 2?", loesung: "5" },
+      { frage: "Was ist die nächste Zahl: 5, 10, 15, ...?", loesung: "20" }
+    ];
+    function neueFrage() {
+      const aktuelleFrage = fragen[Math.floor(Math.random() * fragen.length)];
+      document.getElementById('frage').textContent = aktuelleFrage.frage;
+      document.getElementById('antwort').value = '';
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('absenden').onclick = function() {
+        const eingabe = document.getElementById('antwort').value.trim();
+        if (eingabe === aktuelleFrage.loesung) {
+          document.getElementById('feedback').textContent = "Niko sagt: Super! Das war richtig! 🎉";
+          setTimeout(neueFrage, 1500);
+        } else {
+          document.getElementById('feedback').textContent = "Niko sagt: Versuch's nochmal!";
+        }
+      };
+    }
+    neueFrage();
+    // Geschichten mit Lumo (Demo, KI-ready)
+    document.getElementById('story-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const wunsch = document.getElementById('story-wunsch').value.trim();
+      const ausgabe = document.getElementById('story-ausgabe');
+      if (!wunsch) {
+        ausgabe.textContent = "Bitte gib ein Thema für die Geschichte ein!";
+        return;
+      }
+      ausgabe.textContent = "Lumo zaubert deine Geschichte...";
+      // Für echte KI: siehe vorherige Antworten!
+      setTimeout(() => {
+        ausgabe.textContent = `Es war einmal... ${wunsch}. (Hier kann Lumo mit KI eine echte Geschichte erzählen!)`;
+      }, 1200);
+    });
+  </script>
 </body>
 </html>

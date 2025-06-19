@@ -27,31 +27,12 @@
     <span class="avatar-name">Lumo beantwortet deine Fragen!</span>
   </div>
   <section class="section">
-    <h2>Wähle deinen Begleiter</h2>
-    <div class="avatars">
-      <div class="avatar selected" data-name="Noni">
-        <img src="images/noni-kid.png" alt="Noni Avatar">
-        <span>Noni</span>
-      </div>
-      <div class="avatar" data-name="Niko">
-        <img src="images/niko.png" alt="Niko Avatar">
-        <span>Niko</span>
-      </div>
-      <div class="avatar" data-name="Lumo">
-        <img src="images/lumo.png" alt="Lumo Avatar">
-        <span>Lumo</span>
-      </div>
-    </div>
-    <div id="avatar-message" class="bubble" style="text-align:center;">
-      Hallo, ich bin <strong>Noni</strong>! Stell mir deine Frage.
-    </div>
-  </section>
-  <section class="section">
-    <form id="lumo-form" autocomplete="off">
-      <input type="text" id="lumo-question" placeholder="Deine Frage an Noni, Niko oder Lumo" style="width: 70%; padding: 0.5em; border-radius: 8px;">
+    <h2>Stelle Lumo eine Frage!</h2>
+    <form id="lumo-form">
+      <input type="text" id="lumo-question" placeholder="Deine Frage an Lumo" style="width: 70%; padding: 0.5em; border-radius: 8px;">
       <button type="submit" style="padding: 0.5em 1em; border-radius: 8px; background: #43e6c2; color: #fff; border: none; font-weight: bold;">Fragen</button>
     </form>
-    <div id="lumo-answer" class="bubble"></div>
+    <div id="lumo-answer" class="bubble" style="margin-top:1em;"></div>
   </section>
   <footer>
     © 2025 lumio.io – Gemeinsam für einen smarteren Familienalltag
@@ -60,32 +41,24 @@
     document.getElementById('burger').addEventListener('click', function() {
       document.getElementById('navLinks').classList.toggle('active');
     });
-    // Avatar-Auswahl
-    document.querySelectorAll('.avatar').forEach(avatar => {
-      avatar.addEventListener('click', function() {
-        document.querySelectorAll('.avatar').forEach(a => a.classList.remove('selected'));
-        this.classList.add('selected');
-        const name = this.dataset.name;
-        document.getElementById('avatar-message').innerHTML =
-          `Hallo, ich bin <strong>${name}</strong>! Stell mir deine Frage.`;
+
+    // KI-Anbindung (Backend muss laufen!)
+    async function frageAnKI(prompt) {
+      const response = await fetch('http://localhost:3001/api/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt })
       });
-    });
-    // Demo-KI-Antwort (bereit für echte API)
-    document.getElementById('lumo-form').addEventListener('submit', function(e) {
+      const data = await response.json();
+      return data.answer;
+    }
+    document.getElementById('lumo-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-      const question = document.getElementById('lumo-question').value.trim();
-      const selectedAvatar = document.querySelector('.avatar.selected span').textContent;
-      let answer = '';
-      if (!question) {
-        answer = 'Bitte stelle eine Frage!';
-      } else if (question.toLowerCase().includes('himmel')) {
-        answer = `${selectedAvatar} sagt: Der Himmel erscheint blau, weil das Sonnenlicht in der Atmosphäre gestreut wird und blaues Licht stärker gestreut wird als andere Farben.`;
-      } else {
-        answer = `${selectedAvatar} sagt: Das ist eine tolle Frage! Bald gibt es hier echte KI-Antworten.`;
-      }
-      document.getElementById('lumo-answer').innerHTML = answer;
+      const frage = document.getElementById('lumo-question').value;
+      document.getElementById('lumo-answer').innerText = "Lade Antwort...";
+      const antwort = await frageAnKI(frage);
+      document.getElementById('lumo-answer').innerText = antwort;
     });
   </script>
-  <script src="js/lumo-ai.js"></script>
 </body>
 </html>
